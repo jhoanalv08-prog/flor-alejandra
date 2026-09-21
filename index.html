@@ -39,7 +39,7 @@ canvas{
 </head>
 <body>
 
-<div id="mensaje">Para mi Alejandra, feliz día ❤️</div>
+<div id="mensaje"></div>
 <div id="firma">El amor de mi vida</div>
 
 <canvas id="canvas" width="900" height="900"></canvas>
@@ -124,7 +124,13 @@ for(let i=0;i<60;i++){
     ctx.arc(x,y,2,0,Math.PI*2);
     ctx.fill();
 }
+    
+const params = new URLSearchParams(window.location.search);
 
+const nombre = params.get("nombre") || "persona especial";
+
+document.getElementById("mensaje").innerHTML =
+`Para ${nombre}, feliz día ❤️`;
 </script>
 
 </body>
