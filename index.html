@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi Alejandra</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+canvas{
+    background:black;
+}
+
+#mensaje{
+    position:absolute;
+    top:30px;
+    color:white;
+    font-family:Arial;
+    font-size:22px;
+}
+
+#firma{
+    position:absolute;
+    bottom:30px;
+    color:white;
+    font-family:Arial;
+    font-size:22px;
+}
+</style>
+</head>
+<body>
+
+<div id="mensaje">Para mi Alejandra, feliz día ❤️</div>
+<div id="firma">El amor de mi vida</div>
+
+<canvas id="canvas" width="900" height="900"></canvas>
+
+<script>
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+const cx = canvas.width/2;
+const cy = canvas.height/2;
+
+function drawPetal(angle){
+
+    ctx.save();
+
+    ctx.translate(cx,cy);
+
+    ctx.rotate(angle);
+
+    ctx.beginPath();
+    ctx.strokeStyle = "gold";
+    ctx.lineWidth = 2;
+
+    ctx.ellipse(
+        0,
+        -120,
+        50,
+        140,
+        0,
+        0,
+        Math.PI*2
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+}
+
+for(let i=0;i<24;i++){
+    drawPetal(i*Math.PI/12);
+}
+
+ctx.beginPath();
+ctx.fillStyle="brown";
+ctx.arc(cx,cy,55,0,Math.PI*2);
+ctx.fill();
+
+ctx.strokeStyle="green";
+ctx.lineWidth=10;
+
+ctx.beginPath();
+ctx.moveTo(cx,cy+50);
+ctx.lineTo(cx,cy+280);
+ctx.stroke();
+
+for(let i=0;i<60;i++){
+    let x=Math.random()*canvas.width;
+    let y=Math.random()*canvas.height;
+
+    ctx.fillStyle="white";
+    ctx.beginPath();
+    ctx.arc(x,y,2,0,Math.PI*2);
+    ctx.fill();
+}
+
+</script>
+
+</body>
+</html>
