@@ -79,22 +79,41 @@ function drawPetal(angle){
     ctx.restore();
 }
 
-for(let i=0;i<24;i++){
-    drawPetal(i*Math.PI/12);
+let petal = 0;
+
+function animateFlower() {
+
+    if (petal < 24) {
+        drawPetal(petal * Math.PI / 12);
+        petal++;
+        setTimeout(() => {
+            requestAnimationFrame(animateFlower);
+        }, 120);
+    } else {
+        drawCenter();
+        drawStem();
+    }
 }
 
-ctx.beginPath();
-ctx.fillStyle="brown";
-ctx.arc(cx,cy,55,0,Math.PI*2);
-ctx.fill();
+function drawCenter(){
+    ctx.beginPath();
+    ctx.fillStyle="brown";
+    ctx.arc(cx,cy,55,0,Math.PI*2);
+    ctx.fill();
+}
 
-ctx.strokeStyle="green";
-ctx.lineWidth=10;
+function drawStem(){
+    ctx.strokeStyle="green";
+    ctx.lineWidth=10;
 
-ctx.beginPath();
-ctx.moveTo(cx,cy+50);
-ctx.lineTo(cx,cy+280);
-ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx,cy+50);
+    ctx.lineTo(cx,cy+280);
+    ctx.stroke();
+}
+
+animateFlower();
+
 
 for(let i=0;i<60;i++){
     let x=Math.random()*canvas.width;
